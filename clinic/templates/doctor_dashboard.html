@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Doctor Dashboard</h2>
+  <ul>
+    {% for booking in bookings %}
+      <li>{{ booking.patient }} - {{ booking.date }}</li>
+    {% empty %}
+      <p>No bookings yet.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}

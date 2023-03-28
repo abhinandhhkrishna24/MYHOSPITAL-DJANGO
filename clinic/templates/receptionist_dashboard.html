@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Receptionist Dashboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Patient Name</th>
+        <th>Patient Age</th>
+        <th>Phone Number</th>
+        <th>Symptoms</th>
+        <th>Doctor Name</th>
+        <th>Time Slot</th>
+        <th>Cancelled</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+        <tr>
+          <td>{{ booking.b_date }}</td>
+          <td>{{ booking.pat_name }}</td>
+          <td>{{ booking.pat_age }}</td>
+          <td>{{ booking.pat_phone }}</td>
+          <td>{{ booking.pat_symtom }}</td>
+          <td>{{ booking.doc_name }}</td>
+          <td>{{ booking.b_slot }}</td>
+          <td>{% if booking.cancelled %}Yes{% else %}No{% endif %}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="8">No bookings found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
