@@ -1,6 +1,7 @@
 from django import forms
 from .models import Booking
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -23,9 +24,8 @@ class AppointmentForm(forms.ModelForm):
            'doc_name':'Doctor Name',
            'b_date':'Booking Date',
            'Pat symtom':'Symtoms',
-           'b_slot' : 'Time',
+           'b_slot' : 'SLOT',
         }
-
 
 
 

@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
-    #'accounts',
     'crispy_forms',
     
     
@@ -77,6 +76,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'clinic.wsgi.application'
+
+LOGIN_URL = '/login/'
 
 
 # Database

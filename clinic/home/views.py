@@ -1,8 +1,9 @@
-from ast import Return
-from enum import Flag
-from django.shortcuts import render
-from .models import Doctors, Department 
-from.forms import AppointmentForm
+from django.shortcuts import render, redirect
+from .models import Doctors, Department, Booking
+from .forms import AppointmentForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 
 
 
@@ -41,4 +42,24 @@ def booking(request):
     }
     
     return render(request, 'booking.html', dict_form)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('booking_list')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+@login_required
+def booking_list(request):
+    bookings = Booking.objects.all()
+    return render(request, 'booking_list.html', {'bookings': bookings})    
         
